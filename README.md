@@ -30,6 +30,10 @@ To change ports, consider the following:
 - `8084`: edit: to be announced.
 - `8086`: edit: `Dockerfile, influxDB/config.toml, grafana/config.js, set_influxdb.sh and start script`.
 
-#To start a container with this image you just need to run the following command:
+### To start a container with this image you just need to run the following command:###
 
-docker run -d -p 80:80 -p 8083:8083 -p 8084:8084 -p 8086:8086 --name influxdb-grafana jdromo/influxdb_grafana
+`docker run -d -p 80:80 -p 8083:8083 -p 8084:8084 -p 8086:8086 --name influxdb-grafana jdromo/influxdb_grafana`
+
+### Here is an example (Adding data by InfluxDB HTTP API):###
+
+`curl -X POST -d '[{"name": "log_lines2","columns": ["time", "sequence_number", "line"],"points": [[1452613181755, 1, "this line is first"],[1452613197363, 2, "and this is second"],[1452613231459, 3, "and this is second"],[1452613242651, 4, "and this is second"]]}]' 'http://localhost:8086/db/jmeter/series?u=root&p=root'`
